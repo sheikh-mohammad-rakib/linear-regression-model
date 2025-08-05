@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>CO2 Emission Predictor</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Predict CO2 Emission from Engine Size</h2>
+        <form action="/predict" method="post">
+            <label for="engine_size">Engine Size:</label>
+            <input type="number" step="any" name="engine_size" value="{{ engine_size or '' }}" required>
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction is not none %}
+            <h3>
+                {% if engine_size %}
+                    Prediction for engine size {{ engine_size }}: {{ prediction }}
+                {% else %}
+                    {{ prediction }}
+                {% endif %}
+            </h3>
+        {% endif %}
+    </div>
+</body>
+</html>
